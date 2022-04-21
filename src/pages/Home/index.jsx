@@ -49,7 +49,7 @@ export function Home() {
 
         },
         legend: { position: 'top', alignment: 'center', textStyle: { color: '#fff', fontName: 'Roboto', fontSize: '12' } },
-        colors: ["rgb(255, 231, 172)", "#f16868"],
+        colors: ["rgb(255, 231, 172)", "#E5758E"],
         areaOpacity: 0.24,
         lineWidth: 1,
         backgroundColor: {
@@ -82,7 +82,7 @@ export function Home() {
                 <ContentDashboard>
                     <DashboardDisplay className="dashboard">
                         <PrimaryCard className="patientToday">
-                            <Span>Bom dia, Dr.(a) <strong>{userLogged.displayName}.</strong></Span>
+                            <Span>Bom dia, <strong>{userLogged.displayName}.</strong></Span>
                             <Chart
                                 chartType="ColumnChart"
                                 data={data}
@@ -103,28 +103,11 @@ export function Home() {
                                         </div>
                                     </a>
                                 </SecondaryCardItem1>
-                                <SecondaryCardItem1 className='secondary-card-item1'>
-                                    <h4>Aproval Request</h4>
-                                    <p>26</p>
-                                    <span>Requisições à serem aprovadas</span>
-                                    <a href="#">
-                                        Mais
-                                        <div className="button">
-                                            <AiOutlineRight color='#fff' size={10} />
-                                        </div>
-                                    </a>
-                                </SecondaryCardItem1>
                             </div>
                             <div className="secondary-card-item2">
                                 <h4>Aproval Request</h4>
-                                <p>26</p>
                                 <span>Requisições à serem aprovadas</span>
-                                <a href="#">
-                                    Mais
-                                    <div className="button">
-                                        <AiOutlineRight color='#fff' size={10} />
-                                    </div>
-                                </a>
+
                             </div>
                         </SecondaryCard>
                         <SecondaryCard>
@@ -143,14 +126,8 @@ export function Home() {
                             </div>
                             <div className="secondary-card-item2">
                                 <h4>Aproval Request</h4>
-                                <p>26</p>
                                 <span>Requisições à serem aprovadas</span>
-                                <a href="#">
-                                    Mais
-                                    <div className="button">
-                                        <AiOutlineRight color='#fff' size={10} />
-                                    </div>
-                                </a>
+
                             </div>
                         </SecondaryCard>
                         <SecondaryCard>
@@ -169,14 +146,48 @@ export function Home() {
                             </div>
                             <div className="secondary-card-item2">
                                 <h4>Aproval Request</h4>
-                                <p>26</p>
                                 <span>Requisições à serem aprovadas</span>
-                                <a href="#">
-                                    Mais
-                                    <div className="button">
-                                        <AiOutlineRight color='#fff' size={10} />
-                                    </div>
-                                </a>
+
+                            </div>
+                        </SecondaryCard>
+                        <SecondaryCard>
+                            <div className="section1-card">
+                                <SecondaryCardItem1 className='secondary-card-item1'>
+                                    <h4>Aproval Request</h4>
+                                    <p>26</p>
+                                    <span>Requisições à serem aprovadas</span>
+                                    <a href="#">
+                                        Mais
+                                        <div className="button">
+                                            <AiOutlineRight color='#fff' size={10} />
+                                        </div>
+                                    </a>
+                                </SecondaryCardItem1>
+                            </div>
+                            <div className="secondary-card-item2">
+                                <h4>Aproval Request</h4>
+                                <span>Requisições à serem aprovadas</span>
+
+                            </div>
+                        </SecondaryCard>
+                        <SecondaryCard>
+                            <div className="section1-card">
+                                <SecondaryCardItem1 className='secondary-card-item1'>
+                                    <h4>Aproval Request</h4>
+                                    <p>26</p>
+                                    <span>Requisições à serem aprovadas</span>
+                                    <a href="#">
+                                        Mais
+                                        <div className="button">
+                                            <AiOutlineRight color='#fff' size={10} />
+                                        </div>
+                                    </a>
+                                </SecondaryCardItem1>
+                            </div>
+                            <div className="secondary-card-item2">
+                                <h4>Aproval Request</h4>
+                                <span>Requisições à serem aprovadas</span>
+
                             </div>
                         </SecondaryCard>
                     </DashboardDisplay>

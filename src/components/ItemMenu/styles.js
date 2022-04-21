@@ -11,7 +11,7 @@ export const MenuItem = styled.li`
 
     &:hover {
         //color: rgb(168, 155, 121);
-        color: #978861;
+        //color: #978861;
     }
 
 `

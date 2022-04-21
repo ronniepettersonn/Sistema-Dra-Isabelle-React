@@ -1,0 +1,9 @@
+.container span {
+    margin-top: 20px;
+    color: #cabb94;
+}
+
+.container span a {
+    font-weight: 500;
+    color: #b0a382;
+}

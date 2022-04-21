@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container h1 {
+    margin-bottom: 3rem;
+}
+
+.container a {
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+.container button.buttonOutline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 300px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: transparent;
+    border: 1px solid #cabb94;
+    color: #cabb94;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.container button:hover {
+    filter: brightness(1.05);
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    width: 100%;
+}
+
+.container form label {
+    margin-bottom: .5rem;
+}
+
+.container form input {
+    margin-bottom: 1.5rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.container form button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: #cabb94;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.container .other-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 300px;
+    color: #cabb94;
+    width: 100%;
+}
+
+.container .other-login .line {
+    border: 1px solid;
+    width: 100%;
+    color: #e6e6e6;
+    margin: 30px 0;
+}

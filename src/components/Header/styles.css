@@ -61,6 +61,8 @@
     border-radius: 50%;
     padding: 8px;
     background: #fff;
+    cursor: pointer;
+    position: relative;
 }
 
 .header .header-perfil .notify svg path {

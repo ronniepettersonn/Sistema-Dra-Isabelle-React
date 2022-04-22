@@ -52,6 +52,11 @@ export function Home() {
         colors: ["rgb(255, 231, 172)", "#E5758E"],
         areaOpacity: 0.24,
         lineWidth: 1,
+        animation: {
+            startup: true,
+            duration: 1000,
+            easing: 'out'
+        },
         backgroundColor: {
             fill: 'transparent'
         },
@@ -87,7 +92,8 @@ export function Home() {
                                 chartType="ColumnChart"
                                 data={data}
                                 options={options}
-                            //style={{ marginTop: '10px' }}
+                                style={{ stroke: '1px' }}
+
                             />
                         </PrimaryCard>
                         <SecondaryCard>

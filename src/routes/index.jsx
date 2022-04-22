@@ -4,5 +4,5 @@ import { AuthGoogleContext } from '../context/authGoogle';
 
 export function PrivateRoutes() {
     const { signed } = useContext(AuthGoogleContext)
-    return signed ? <Outlet /> : <Navigate to="/" />;
+    return signed ? <Outlet /> : <Navigate to="/" replace />;
 };

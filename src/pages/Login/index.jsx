@@ -77,7 +77,7 @@ export function Login() {
         )
     } else {
         return (
-            <Navigate to="home" />
+            <Navigate to="home" replace />
         )
     }
 

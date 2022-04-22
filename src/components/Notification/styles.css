@@ -1,0 +1,9 @@
+.icon-notification {
+    height: 8px;
+    width: 8px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 1.1px;
+    right: 1.1px;
+}

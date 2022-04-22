@@ -70,6 +70,10 @@
     max-width: 102px;
 }
 
+.form-create-patient form .form-item.address_number {
+    max-width: 70px;
+}
+
 .form-create-patient form .form-item.insurance {
     min-width: 100px;
     max-width: 105px;

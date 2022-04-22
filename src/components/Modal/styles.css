@@ -15,7 +15,7 @@
     flex-direction: column;
     padding: 0 40px;
     border-radius: 8px;
-    width: max(700px, 30%);
+    width: max(800px, 30%);
     max-height: 100%;
     background: #f0f3f9;
 }

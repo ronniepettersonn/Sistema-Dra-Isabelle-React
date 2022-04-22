@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { PrivateRoutes } from '.'
 import { CadastroCliente } from '../pages/CadastroCliente'
 import CadastroUsuario from '../pages/CadastroUsuario'
+import DetailsPatient from '../pages/DetailsPatient/insdex'
 import { Fichas } from '../pages/Fichas'
 import { Home } from '../pages/Home'
 import { Login } from '../pages/Login'
@@ -23,6 +24,7 @@ export function RoutesApp() {
                 </Route>
                 <Route path='/cadastro/cliente' element={<PrivateRoutes />}>
                     <Route path='/cadastro/cliente' element={<CadastroCliente />} />
+                    <Route path='/cadastro/cliente/:id' element={<DetailsPatient />} />
                 </Route>
                 <Route path='/fichas' element={<PrivateRoutes />}>
                     <Route path='/fichas' element={<Fichas />} />

@@ -24,6 +24,7 @@ function CreatePatient({ closeModal }) {
         //e.preventDefault()
 
         const name = document.querySelector('#name').value
+        const phone = document.querySelector('#phone').value
         const address = document.querySelector('#address').value
         const address_number = document.querySelector('#address_number').value
         const address_complement = document.querySelector('#address_complement').value
@@ -42,6 +43,7 @@ function CreatePatient({ closeModal }) {
 
         let createObjectPatient = {
             name,
+            phone,
             address,
             address_number: Number(address_number),
             address_complement,
@@ -89,11 +91,16 @@ function CreatePatient({ closeModal }) {
                         <input type="email" name='email' id='email' placeholder='email@dominio.com.br' required />
 
                     </div>
-                    <div className="form-item .address">
+                    <div className="form-item">
+                        <label htmlFor="phone">Telefone</label>
+                        <input type="tel" name='phone' id='phone' placeholder='31 9 8382-8880' required />
+
+                    </div>
+                    <div className="form-item address">
                         <label htmlFor="address">Endereço</label>
                         <input type="text" name='address' id='address' placeholder='Rua das Flores' required />
                     </div>
-                    <div className="form-item">
+                    <div className="form-item address_number">
                         <label htmlFor="address_number">Numero</label>
                         <input type="number" name='address_number' id='address_number' placeholder='10' required />
 

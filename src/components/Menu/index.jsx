@@ -38,7 +38,7 @@ export function Menu(props) {
                     })}>
                         <ItemMenu title="Agenda" icon={<BiCalendar size={20} />} />
                     </NavLink>
-                    <NavLink to="/cadastro/cliente" style={({ isActive }) => ({
+                    <NavLink to="/pacientes" style={({ isActive }) => ({
                         background: isActive ? '#cabb93' : 'transparent',
                         textDecoration: 'none',
                         color: isActive ? '#fff' : '#010f1d',

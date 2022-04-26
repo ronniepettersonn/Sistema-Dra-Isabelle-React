@@ -1,6 +1,49 @@
 .header-patients {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.header-patients .header-patients-search {
+    margin-left: 10px;
+    padding-left: 20px;
+    border-left: 1px solid #ddd;
+}
+
+.header-patients .header-patients-search form {
+    display: flex;
+    align-items: center;
+}
+
+.header-patients .header-patients-search button {
+    position: relative;
+    left: -30px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.header-patients .header-patients-search input {
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 12px;
+    background: transparent;
+    border: 1px solid #dddddd;
+}
+
+.header-patients .header-patients-search input::placeholder {
+    color: #79868f;
+}
+
+.header-patients .header-patients-count {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #79868f;
+}
+
+.header-patients .header-patients-count h2 {
+    color: rgb(202, 187, 147);
 }
 
 .header-patients .form-patient {
@@ -10,75 +53,133 @@
 .content-patients {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 15px;
     margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.content-patients .item-patient {
+.content-patients td {
     display: flex;
     align-items: center;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #051424;
+}
+
+.content-patients th {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    color: #79868f;
+    font-weight: 400;
+    font-size: 14px;
+    flex: 1;
+}
+
+.content-patients thead th:first-child {
+    max-width: 50px;
+}
+
+.content-patients thead tr {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-patients tbody tr {
+    display: flex;
+    justify-content: space-between;
     background: #fff;
-    padding: 20px;
     border-radius: 8px;
+    margin-bottom: 10px;
 }
 
-.item-patient .item-patient-avatar {
+.content-patients tbody td:first-child {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 15px;
+
+    max-width: 50px;
+    padding-right: 0;
 }
 
-.item-patient .item-patient-name {
+.content-patients tbody td:nth-child(2),
+.content-patients thead th:nth-child(2) {
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    max-width: 350px;
+    min-width: 250px;
+}
+
+.content-patients tbody td:nth-child(3),
+.content-patients thead th:nth-child(3) {
+    display: flex;
+    width: 100%;
+    max-width: 150px;
+}
+
+.content-patients tbody td:nth-child(4),
+.content-patients thead th:nth-child(4) {
+    display: flex;
+    width: 100%;
+    max-width: 150px;
+}
+
+.content-patients tbody td:nth-child(5),
+.content-patients thead th:nth-child(5) {
+    display: flex;
+    width: 100%;
+    max-width: 150px;
+    min-width: 100px;
+}
+
+.content-patients tbody td:nth-child(6),
+.content-patients thead th:nth-child(6) {
+    display: flex;
+    width: 100%;
+    max-width: 150px;
+    min-width: 100px;
+}
+
+.content-patients tbody td:nth-child(7),
+.content-patients thead th:nth-child(7) {
+    display: flex;
+    width: 100%;
+    max-width: 150px;
+}
+
+.content-patients tbody td:last-child,
+.content-patients thead th:last-child {
+    display: flex;
+    width: 100%;
+    max-width: 50px;
+}
+
+.content-patients tbody tr td {
+    display: flex;
+    align-items: center;
     flex: 1;
 }
 
-.item-patient .item-patient-phone {
-    font-size: 14px;
-    flex: 1;
-}
-
-.item-patient .item-patient-city {
-    font-size: 14px;
-    flex: 1;
-}
-
-.item-patient .item-patient-next-appointment {
-    font-size: 14px;
-    flex: 1;
-}
-
-.item-patient .item-patient-next-appointment {
-    font-size: 14px;
-    flex: 1;
-}
-
-.item-patient .item-patient-last-appointment {
-    font-size: 14px;
-    flex: 1;
-}
-
-.item-patient .item-patient-rigister {
-    font-size: 14px;
-
-}
-
-.item-patient .item-patient-options {
+.content-patients .more-button {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.item-patient .item-patient-options button {
     background: transparent;
-    margin-left: 40px;
     cursor: pointer;
 }
 
-.item-patient .item-patient-name span {
+.content-patients .item-patient-name {
+    display: flex;
+    gap: 4px;
+    font-weight: 500;
+    flex-direction: column;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.content-patients .item-patient-name span {
     font-size: 12px;
-    color: #8e9aa2;
-    margin-top: 5px;
+    font-weight: 400;
+    color: #a4aeb4;
 }

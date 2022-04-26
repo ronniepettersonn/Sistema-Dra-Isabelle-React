@@ -93,7 +93,7 @@ export function Home() {
                                 data={data}
                                 options={options}
                                 style={{ stroke: '1px' }}
-
+                                loader={'Carregando...'}
                             />
                         </PrimaryCard>
                         <SecondaryCard>

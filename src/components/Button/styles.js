@@ -35,5 +35,25 @@ export const ButtonTeste = styled.button`
     
     `}
 
+    ${props => props.edit && css`
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border:1px solid #ddd;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 8px;
+        margin-top: 16px;
+        width: 100%;
+
+        font-size: 14px;
+
+        &:hover {
+            filter: brightness(.9);
+        }
     
+    `}
+
+
 `

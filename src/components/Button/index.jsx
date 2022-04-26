@@ -13,6 +13,7 @@ function Button(props) {
                 logout={props.logout}
                 create={props.create}
                 id={props.id}
+                edit={props.edit}
             >{props.title}</ButtonTeste>
         </>
     )

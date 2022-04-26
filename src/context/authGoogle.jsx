@@ -5,7 +5,7 @@ import { app } from '../services/firebaseConfig'
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import { Navigate } from 'react-router-dom';
 
-import { Flip, toast, ToastContainer } from 'react-toastify';
+import { Flip, toast } from 'react-toastify';
 
 const provider = new GoogleAuthProvider();
 

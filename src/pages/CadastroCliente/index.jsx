@@ -6,7 +6,7 @@ import './styles.css'
 
 import { ContentDashboard } from '../../components/ContentDashboard';
 import { Menu } from '../../components/Menu';
-import { BiUser, FaUserCircle, MdMoreHoriz } from 'react-icons/all';
+import { BiUser, FaUserCircle, MdMoreHoriz, MdDeleteOutline, BiSearch } from 'react-icons/all';
 
 import CreatePatient from '../../components/CreatePatient';
 import { ToastContainer } from 'react-toastify';
@@ -16,16 +16,94 @@ import { NavLink } from 'react-router-dom';
 
 export function CadastroCliente() {
     const [pactients, setPatients] = useState([]);
+    const [listUpdate, setListUpdate] = useState([]);
+
+    const [showAll, setShowAll] = useState(true)
+
+    const [search, setSearch] = useState([])
+
+    const [openModal, setOpenModal] = useState(false)
 
     useEffect(() => {
+        if (showAll === true) {
+            api.get('/patients')
+                .then(res => {
+                    const listPatient = res.data.data;
+                    return setPatients(listPatient)
+                })
+        }
+
+        function updateList() {
+            setPatients(listUpdate)
+        }
+        updateList()
+
+        if (search.length !== 0) {
+            function updateSearch() {
+                setPatients(search)
+            }
+            updateSearch()
+        }
+
+    }, [listUpdate, search]);
+
+    function handleDelete(id) {
+        api.delete('/patients/' + id)
+
         api.get('/patients')
             .then(res => {
                 const listPatient = res.data.data;
-                return setPatients(listPatient)
+                return setListUpdate(listPatient)
             })
-    }, [pactients])
+        setShowAll(true)
+    };
 
-    const [openModal, setOpenModal] = useState(false)
+    function limpList() {
+        return setPatients([])
+    }
+
+    function handleUpdateList() {
+        api.get('/patients')
+            .then(res => {
+                const listPatient = res.data.data;
+                return setListUpdate(listPatient)
+            })
+        setShowAll(true)
+    };
+
+    function handleSearchPatient(e) {
+        e.preventDefault()
+
+        let name = document.querySelector('#search-patient').value
+
+        if (name === '') {
+            api.get('/patients')
+                .then(res => {
+                    const listPatient = res.data.data;
+                    return setPatients(listPatient)
+                })
+            setShowAll(true)
+        } else {
+            api.get('/patients/search/' + name)
+                .then(res => {
+                    const listPatient = res.data.data;
+
+                    if (listPatient.length === 0) {
+                        setShowAll(false)
+                        return setSearch([]), setListUpdate([])
+                    } else {
+
+                        setShowAll(false)
+
+                        return setSearch(listPatient)
+                    }
+
+                })
+
+        }
+
+
+    }
 
     return (
         <Container>
@@ -34,64 +112,131 @@ export function CadastroCliente() {
                 <Header page="Pacientes" icon={<BiUser size={28} />} />
                 <ContentDashboard>
                     <div className="header-patients">
-                        <h2>Pacientes</h2>
-                        <Button onClick={() => setOpenModal(true)} title="Novo paciente" create className="form-patient" />
-                        {openModal && <CreatePatient closeModal={setOpenModal} />}
+                        <div className="header-patients-count">
+                            <h2>{pactients.length}</h2>Pacientes
+                            <div className="header-patients-search">
+                                <form action="">
+                                    <input type="search" name="search-patient" id="search-patient" placeholder='Pesquisar por paciente' />
+
+                                    <button onClick={(e) => {
+                                        handleSearchPatient(e)
+                                    }
+                                    }><BiSearch size={18} color={'#79868f'} /></button>
+
+                                </form>
+                            </div>
+                        </div>
+
+                        <Button onClick={() => {
+                            setOpenModal(true)
+                        }} title="Novo paciente" create className="form-patient" />
+                        {openModal && <CreatePatient closeModal={setOpenModal} updateList={handleUpdateList} limpList={limpList} />}
                     </div>
 
-                    <div className="content-patients">
+                    <table className="content-patients">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th>Informações básica</th>
+                                <th>Telefone</th>
+                                <th>Cidade</th>
+                                <th>Próximo atendimento</th>
+                                <th>Último atendimento</th>
+                                <th>Data de cadastro</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                pactients.map((item) => {
+                                    function adicionaZero(numero) {
+                                        if (numero <= 9)
+                                            return "0" + numero;
+                                        else
+                                            return numero;
+                                    }
 
-                        {
-                            pactients.map((item) => {
-                                function adicionaZero(numero) {
-                                    if (numero <= 9)
-                                        return "0" + numero;
-                                    else
-                                        return numero;
-                                }
+                                    function formatingDate(item) {
+                                        let data = new Date(item)
+                                        let dataFormating = (adicionaZero(data.getDate().toString()) + "/" + (adicionaZero(data.getMonth() + 1).toString()) + "/" + data.getFullYear())
 
-                                function formatingDate(item) {
-                                    let data = new Date(item)
-                                    let dataFormating = (adicionaZero(data.getDate().toString()) + "/" + (adicionaZero(data.getMonth() + 1).toString()) + "/" + data.getFullYear())
+                                        return dataFormating
+                                    }
 
-                                    return dataFormating
-                                }
+                                    return (
+                                        // <div key={item.id} className="item-patient">
+                                        <>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" value={item.id} />
+                                                </td>
 
-                                return (
-                                    <div key={item.id} className="item-patient">
-                                        <input type="checkbox" style={{ marginRight: '15px' }} value={item.id} />
-                                        <div className="item-patient-avatar">
-                                            <FaUserCircle size={52} color={'#f1f1f1'} />
-                                        </div>
-                                        <div className="item-patient-name">
-                                            {item.name}
-                                            <span>{item.email}</span>
-                                        </div>
-                                        <div className="item-patient-phone">
-                                            {item.phone}
-                                        </div>
-                                        <div className="item-patient-city">
-                                            {item.address_city}
-                                        </div>
-                                        <div className="item-patient-next-appointment">
-                                            {formatingDate(item.updated_at)}
-                                        </div>
-                                        <div className="item-patient-last-appointment">
-                                            {formatingDate(item.updated_at)}
-                                        </div>
-                                        <div className="item-patient-rigister">
-                                            {formatingDate(item.created_at)}
-                                        </div>
-                                        <div className="item-patient-options">
-                                            <NavLink to={'/cadastro/cliente/' + item.id}>
-                                                <button className='more-button'><MdMoreHoriz size={20} /></button>
-                                            </NavLink>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                                                <td>
+                                                    <div className="item-patient-avatar">
+                                                        <FaUserCircle size={52} color={'#f1f1f1'} />
+                                                    </div>
+                                                    <div className="item-patient-name">
+                                                        {item.name}
+                                                        <span>{item.email}</span>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+
+                                                    <div className="item-patient-phone">
+                                                        {item.phone}
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div className="item-patient-city">
+                                                        {item.address_city}
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div className="item-patient-next-appointment">
+                                                        {formatingDate(item.updated_at)}
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div className="item-patient-last-appointment">
+                                                        {formatingDate(item.updated_at)}
+                                                    </div>
+
+                                                </td>
+
+                                                <td>
+                                                    <div className="item-patient-rigister">
+                                                        {formatingDate(item.created_at)}
+                                                    </div>
+
+                                                </td>
+
+                                                <td>
+                                                    <div className="item-patient-options">
+                                                        <NavLink to={'/pacientes/' + item.id}>
+                                                            <button className='more-button'><MdMoreHoriz size={20} /></button>
+                                                        </NavLink>
+                                                        <button style={{ backgroundColor: 'transparent' }} onClick={() => {
+                                                            handleDelete(item.id)
+                                                        }}><MdDeleteOutline color='red' /></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                    {
+                        (pactients.length === 0) ? <div className='no-result-search' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                            <h1>Nada aqui!</h1>
+                        </div> : null
+                    }
                 </ContentDashboard>
             </Content>
             <ToastContainer

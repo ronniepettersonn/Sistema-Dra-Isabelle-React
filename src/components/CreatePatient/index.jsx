@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from '../Modal';
 import { CgClose } from 'react-icons/all'
 
@@ -6,11 +6,11 @@ import { Flip, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './styles.css';
-import { InputCEP, InputCPF } from '../InputMask';
+import { InputCEP, InputCPF, InputPhone } from '../InputMask';
 import Button from '../Button';
 import { api } from '../../services/api';
 
-function CreatePatient({ closeModal }) {
+function CreatePatient({ closeModal, updateList, limpList }) {
 
     const notifySuccess = () => toast.success('Cadastro realizado com sucesso!', {
         transition: Flip,
@@ -24,7 +24,7 @@ function CreatePatient({ closeModal }) {
         //e.preventDefault()
 
         const name = document.querySelector('#name').value
-        const phone = document.querySelector('#phone').value
+        let phone = document.querySelector('#phone').value
         const address = document.querySelector('#address').value
         const address_number = document.querySelector('#address_number').value
         const address_complement = document.querySelector('#address_complement').value
@@ -60,6 +60,7 @@ function CreatePatient({ closeModal }) {
             type_patient
         }
 
+
         await api.post('/patients', createObjectPatient)
             .then(response => {
                 if (response.data.success) {
@@ -69,7 +70,7 @@ function CreatePatient({ closeModal }) {
             })
             .catch(err => { notifyError() }).catch(err => console.log(err))
 
-        console.log(JSON.stringify(createObjectPatient))
+        //console.log(createObjectPatient)
     }
 
     return (
@@ -80,7 +81,7 @@ function CreatePatient({ closeModal }) {
                 <button className='button-close-modal' onClick={() => closeModal(false)}><CgClose /></button>
             </div>
             <div className="form-create-patient">
-                <form action="" id='form-patient' method='POST'>
+                <form action="/cadastro/cliente" id='form-patient' method='POST'>
                     <div className="form-item">
                         <label htmlFor="name">Nome</label>
                         <input type="text" name='name' id='name' placeholder='Digite seu nome' required />
@@ -93,7 +94,7 @@ function CreatePatient({ closeModal }) {
                     </div>
                     <div className="form-item">
                         <label htmlFor="phone">Telefone</label>
-                        <input type="tel" name='phone' id='phone' placeholder='31 9 8382-8880' required />
+                        <InputPhone type="tel" name='phone' id='phone' placeholder='31 9 8382-8880' required />
 
                     </div>
                     <div className="form-item address">
@@ -163,7 +164,8 @@ function CreatePatient({ closeModal }) {
 
 
                 </form>
-                <Button form='form-patient' type="submit" title="Cadastrar" onClick={createPatient} create id="submit-formpatient" />
+                <Button form='form-patient' type="submit" title="Cadastrar" onClick={() => createPatient() && updateList() && limpList()
+                } create id="submit-formpatient" />
             </div>
             <ToastContainer
                 position="top-right"

@@ -22,9 +22,9 @@ export function RoutesApp() {
                 <Route path='/home' element={<PrivateRoutes />}>
                     <Route path='/home' element={<Home />} />
                 </Route>
-                <Route path='/cadastro/cliente' element={<PrivateRoutes />}>
-                    <Route path='/cadastro/cliente' element={<CadastroCliente />} />
-                    <Route path='/cadastro/cliente/:id' element={<DetailsPatient />} />
+                <Route path='/pacientes' element={<PrivateRoutes />}>
+                    <Route path='/pacientes' element={<CadastroCliente />} />
+                    <Route path='/pacientes/:id' element={<DetailsPatient />} />
                 </Route>
                 <Route path='/fichas' element={<PrivateRoutes />}>
                     <Route path='/fichas' element={<Fichas />} />

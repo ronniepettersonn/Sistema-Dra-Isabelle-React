@@ -1,0 +1,84 @@
+.header.modal {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+}
+
+.button-close-modal {
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.form-create-patient {
+    display: flex;
+    flex-direction: column;
+    margin-top: 36px;
+}
+
+.form-create-patient #submit-formpatient {
+    margin-bottom: 40px;
+}
+
+.form-create-patient form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.form-create-patient form .form-item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+
+.form-create-patient form .form-item select {
+    display: flex;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.form-create-patient form .form-item input {
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.form-create-patient form .form-item label {
+    font-size: 12px;
+}
+
+.form-create-patient form .form-item.address {
+    display: flex;
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-create-patient form .form-item.uf {
+    max-width: 50px;
+}
+
+.form-create-patient form .form-item .select.type-patient,
+.form-create-patient form .form-item.type-patient {
+    max-width: 102px;
+}
+
+.form-create-patient form .form-item.address_number {
+    max-width: 70px;
+}
+
+.form-create-patient form .form-item.insurance {
+    min-width: 100px;
+    max-width: 105px;
+}
+
+.form-create-patient form .form-item .select.insurance select {
+    width: 100%;
+}

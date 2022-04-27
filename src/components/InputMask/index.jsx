@@ -3,14 +3,14 @@ import InputMask from 'react-input-mask'
 
 // import { Container } from './styles';
 
-export function InputCEP(props) {
-    return <InputMask mask="99.999-999" value={props.value} onChange={props.onChange} type={props.type} name={props.name} id={props.name} placeholder={props.placeholder} />
+export function InputCEP({ ...rest }) {
+    return <InputMask mask="99.999-999" {...rest} />
 }
 
-export function InputCPF(props) {
-    return <InputMask mask="999.999.999-99" value={props.value} onChange={props.onChange} type={props.type} name={props.name} id={props.name} placeholder={props.placeholder} required={props.required} />
+export function InputCPF({ ...rest }) {
+    return <InputMask mask="999.999.999-99" {...rest} required="required" />
 }
 
-export function InputPhone(props) {
-    return <InputMask mask='(99) 9 9999-9999' value={props.value} onChange={props.onChange} type={props.type} name={props.name} id={props.name} placeholder={props.placeholder} />
+export function InputPhone({ ...rest }) {
+    return <InputMask mask='(99) 9 9999-9999' {...rest} />
 }

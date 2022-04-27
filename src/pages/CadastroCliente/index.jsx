@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Header } from '../../components/Header';
 
-import { Container, Content } from './styles'
+import { Container, Content, MenuFloatStyle } from './styles'
 import './styles.css'
 
 import { ContentDashboard } from '../../components/ContentDashboard';
 import { Menu } from '../../components/Menu';
-import { BiUser, FaUserCircle, MdMoreHoriz, MdDeleteOutline, BiSearch } from 'react-icons/all';
+
+import { BiUser, FaUserCircle, MdMoreHoriz, MdDeleteOutline, BiSearch, BiEdit } from 'react-icons/all';
 
 import CreatePatient from '../../components/CreatePatient';
 import { ToastContainer } from 'react-toastify';
@@ -16,12 +17,19 @@ import { NavLink } from 'react-router-dom';
 
 export function CadastroCliente() {
     const [pactients, setPatients] = useState([]);
+
     const [listUpdate, setListUpdate] = useState([]);
 
     const [showAll, setShowAll] = useState(true)
 
     const [search, setSearch] = useState([])
 
+    // estado para abrir menu de opções
+    const [openMenu, setOpenMenu] = useState('')
+
+    const [controllerOpenMenu, setControllerOpenMenu] = useState(false)
+
+    // estado pra abrir modal
     const [openModal, setOpenModal] = useState(false)
 
     useEffect(() => {
@@ -44,6 +52,8 @@ export function CadastroCliente() {
             }
             updateSearch()
         }
+
+        setControllerOpenMenu(false)
 
     }, [listUpdate, search]);
 
@@ -102,8 +112,19 @@ export function CadastroCliente() {
 
         }
 
-
     }
+
+    /* function handleOpenMenu() {
+        document.body.addEventListener('click', function (e) {
+            var target = e.target
+
+            if (target.className === 'menu-float' || target.parentNode.className === 'item-patient-options')
+                setControllerOpenMenu(true)
+            else
+                setControllerOpenMenu(false)
+        });
+    } */
+
 
     return (
         <Container>
@@ -149,6 +170,7 @@ export function CadastroCliente() {
                         <tbody>
                             {
                                 pactients.map((item) => {
+
                                     function adicionaZero(numero) {
                                         if (numero <= 9)
                                             return "0" + numero;
@@ -216,12 +238,30 @@ export function CadastroCliente() {
 
                                                 <td>
                                                     <div className="item-patient-options">
-                                                        <NavLink to={'/pacientes/' + item.id}>
-                                                            <button className='more-button'><MdMoreHoriz size={20} /></button>
-                                                        </NavLink>
-                                                        <button style={{ backgroundColor: 'transparent' }} onClick={() => {
-                                                            handleDelete(item.id)
-                                                        }}><MdDeleteOutline color='red' /></button>
+                                                        <MenuFloatStyle className={`menu-float`} show={openMenu === item.id && controllerOpenMenu ? true : false} id={`${item.id}`}>
+                                                            <div className="menu-float-item">
+                                                                <NavLink to={'/pacientes/' + item.id}>
+                                                                    <BiEdit />
+                                                                    Editar paciente
+                                                                </NavLink>
+                                                            </div>
+                                                            <div className="menu-float-item">
+                                                                <button style={{ backgroundColor: 'transparent' }} onClick={() => {
+                                                                    handleDelete(item.id)
+                                                                }}><MdDeleteOutline />
+                                                                    Apagar paciente</button>
+                                                            </div>
+                                                        </MenuFloatStyle>
+                                                        <button key={item.id} onClick={() => {
+                                                            setOpenMenu(item.id)
+
+                                                            /*  if (controllerOpenMenu === true) {
+                                                                 handleOpenMenu()
+                                                             } */
+
+                                                            controllerOpenMenu ? setControllerOpenMenu(false) : setControllerOpenMenu(true)
+
+                                                        }} className='more-button'><MdMoreHoriz size={20} /></button>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -20,6 +20,10 @@ function CreatePatient({ closeModal, updateList, limpList }) {
         transition: Flip,
     })
 
+    const notifyValidateInputs = () => toast.error('Preencha todos os campos obrigatórios*', {
+        transition: Flip,
+    })
+
     async function createPatient(e) {
         //e.preventDefault()
 
@@ -60,15 +64,22 @@ function CreatePatient({ closeModal, updateList, limpList }) {
             type_patient
         }
 
+        if (cpf !== '') {
+            await api.post('/patients', createObjectPatient)
+                .then(response => {
+                    if (response.data.success) {
+                        notifySuccess();
+                        closeModal(false);
+                    }
+                })
+                .catch(err => { notifyError() }).catch(err => console.log(err))
 
-        await api.post('/patients', createObjectPatient)
-            .then(response => {
-                if (response.data.success) {
-                    notifySuccess();
-                    closeModal(false);
-                }
-            })
-            .catch(err => { notifyError() }).catch(err => console.log(err))
+            updateList()
+            limpList()
+        } else {
+            notifyValidateInputs()
+        }
+
 
         //console.log(createObjectPatient)
     }
@@ -89,7 +100,7 @@ function CreatePatient({ closeModal, updateList, limpList }) {
                     </div>
                     <div className="form-item">
                         <label htmlFor="email">E-mail</label>
-                        <input type="email" name='email' id='email' placeholder='email@dominio.com.br' required />
+                        <input type="email" name='email' id='email' placeholder='email@dominio.com.br' required='required' />
 
                     </div>
                     <div className="form-item">
@@ -124,8 +135,8 @@ function CreatePatient({ closeModal, updateList, limpList }) {
                         <InputCEP type="text" name='address_zip_code' id='address_zip_code' placeholder='31000-000' />
                     </div>
                     <div className="form-item">
-                        <label htmlFor="cpf">CPF</label>
-                        <InputCPF type="text" name='cpf' id='cpf' placeholder='000.000.000-00' />
+                        <label htmlFor="cpf">CPF *</label>
+                        <InputCPF type="text" name='cpf' id='cpf' placeholder='000.000.000-00' required='required' />
                     </div>
                     <div className="form-item insurance">
                         <label htmlFor="insurance">Possui convênio?</label>
@@ -164,7 +175,7 @@ function CreatePatient({ closeModal, updateList, limpList }) {
 
 
                 </form>
-                <Button form='form-patient' type="submit" title="Cadastrar" onClick={() => createPatient() && updateList() && limpList()
+                <Button form='form-patient' type="submit" title="Cadastrar" onClick={() => createPatient()
                 } create id="submit-formpatient" />
             </div>
             <ToastContainer

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { MdSettings } from 'react-icons/md';
+import { ToastContainer } from 'react-toastify';
 import Button from '../../components/Button';
 import { ContentDashboard } from '../../components/ContentDashboard';
+import EditPatient from '../../components/EditPatient';
 import { Header } from '../../components/Header';
 import { Menu } from '../../components/Menu';
 import { api } from '../../services/api';
@@ -10,8 +12,11 @@ import { Container, Content } from '../Fichas/styles';
 import './styles.css'
 
 function DetailsPatient() {
-
     const [patient, setPatient] = useState([]);
+
+    const [updateList, setUpdateList] = useState(false)
+
+    const [openModal, setOpenModal] = useState(false)
 
     // pegar id do paciente passado na URL
     let url = window.location.href
@@ -24,7 +29,9 @@ function DetailsPatient() {
                 const listPatient = res.data.data;
                 return setPatient(listPatient)
             })
-    }, [])
+
+        setUpdateList(false)
+    }, [updateList])
 
     return (
         <Container>
@@ -44,7 +51,7 @@ function DetailsPatient() {
 
                                 function formatingDate(item) {
                                     let data = new Date(item)
-                                    let dataFormating = (adicionaZero(data.getDate().toString()) + "/" + (adicionaZero(data.getMonth() + 1).toString()) + "/" + data.getFullYear())
+                                    let dataFormating = (adicionaZero(data.getDate().toString()) + "/" + (adicionaZero(data.getMonth() + 1).toString()) + "/" + data.getFullYear() + " às " + data.getHours() + ":" + data.getMinutes())
 
                                     return dataFormating
                                 }
@@ -53,8 +60,8 @@ function DetailsPatient() {
                                     <>
                                         <div className="section1-card-pessoal-info">
                                             <img src="https://github.com/ronniepettersonn.png" alt="Foto perfil" />
-                                            <h3 key={patientData.id}>{patientData.name}</h3>
-                                            <span className='email' key={patientData.id}>{patientData.email}</span>
+                                            <h3 key={patientData.name}>{patientData.name}</h3>
+                                            <span className='email' key={patientData.email}>{patientData.email}</span>
                                             <div className="info">
                                                 <section className='attendances'>
                                                     <strong>5</strong>
@@ -66,7 +73,10 @@ function DetailsPatient() {
                                                 </section>
                                             </div>
 
-                                            <Button title="Editar perfil" edit />
+                                            <Button onClick={() => {
+                                                setOpenModal(true)
+                                            }} title="Editar paciente" edit className="form-patient" />
+                                            {openModal && <EditPatient closeModal={setOpenModal} updateList={setUpdateList} />}
                                         </div>
                                         <div className="section2-card-pessoal-info">
                                             <div className="info">
@@ -109,8 +119,8 @@ function DetailsPatient() {
                                                     <p key={patientData.phone}>{patientData.phone}</p>
                                                 </section>
                                                 <section>
-                                                    <span>Data cadastro</span>
-                                                    <p key={patientData.id}>{formatingDate(patientData.created_at)}</p>
+                                                    <span>Ultima atualização</span>
+                                                    <p key={patientData.id}>{formatingDate(patientData.updated_at)}</p>
                                                 </section>
                                             </div>
                                         </div>
@@ -119,6 +129,18 @@ function DetailsPatient() {
                             })
                         }
                     </div>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+
+                    />
                 </ContentDashboard>
             </Content>
         </Container>

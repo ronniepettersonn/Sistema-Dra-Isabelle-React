@@ -1,22 +1,22 @@
+
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyDRt2taGfYeETCliJCS79o3GAQt5jGeGaA",
+    apiKey: import.meta.env.VITE_API_KEY,
 
-    authDomain: "dra-isabelle.firebaseapp.com",
+    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
 
-    projectId: "dra-isabelle",
+    projectId: import.meta.env.VITE_PROJECT_ID,
 
-    storageBucket: "dra-isabelle.appspot.com",
+    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
 
-    messagingSenderId: "825195506545",
+    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
 
-    appId: "1:825195506545:web:a107cc49ee19c9d7aea4d0",
+    appId: import.meta.env.VITE_APP_ID,
 
-    measurementId: "G-JSBDT2P44Q"
+    measurementId: import.meta.env.VITE_MEASUREMENT_ID
 
 };
 
 export const app = initializeApp(firebaseConfig);
-

@@ -183,3 +183,39 @@
     font-weight: 400;
     color: #a4aeb4;
 }
+
+.item-patient-options {
+    position: relative;
+}
+
+/* .item-patient-options .menu-float {
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    border-radius: 8px;
+    gap: 10px;
+    position: absolute;
+    right: 0px;
+    top: 20px;
+    background: #fff;
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .1);
+    min-width: 150px;
+    width: 100%;
+
+} */
+
+.item-patient-options .menu-float-item a {
+    font-size: 12px;
+    gap: 5px;
+    display: flex;
+    text-decoration: none;
+    color: #7f8b95;
+}
+
+.item-patient-options .menu-float-item button {
+    font-size: 12px;
+    color: #DC6065;
+    cursor: pointer;
+    display: flex;
+    gap: 5px;
+}
